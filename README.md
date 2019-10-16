@@ -2,7 +2,7 @@
 
 目录 | 说明 | 默认构建库
 ---|---|---
-ubuntu_withlibs_cpu |  放置CPU版的基础镜像，基于Ubuntu，含有iServer所需系统依赖+AIGIS 所需的conda依赖 | registry.cn-beijing.aliyuncs.com/imanager/ubuntu_condawithlib_cpu
+ubuntu_withlibs_cpu |  放置CPU版的基础镜像，基于Ubuntu，含有iServer所需系统依赖+AIGIS 所需的conda依赖 | registry.cn-beijing.aliyuncs.com/imanager/ubuntu_aigislib_cpu
 
 
 

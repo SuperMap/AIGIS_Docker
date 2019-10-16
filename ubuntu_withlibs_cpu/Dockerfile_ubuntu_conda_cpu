@@ -1,4 +1,4 @@
-# BUILD to registry.cn-beijing.aliyuncs.com/imanager/ubuntu_condawithlib_cpu
+# BUILD to  registry.cn-beijing.aliyuncs.com/imanager/ubuntu_aigislib_cpu
 FROM registry.cn-beijing.aliyuncs.com/imanager/ipse_base:latest
 
 RUN curl -LO http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
