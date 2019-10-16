@@ -1,9 +1,19 @@
-# SuperMap AIGIS ·şÎñµÄ»ù´¡¾µÏñ
+# SuperMap AIGIS æœåŠ¡çš„åŸºç¡€é•œåƒ
 
-Ä¿Â¼ | ËµÃ÷ | Ä¬ÈÏ¹¹½¨¿â
+ç›®å½• | è¯´æ˜ | é»˜è®¤æ„å»ºåº“
 ---|---|---
-ubuntu_withlibs_cpu |  ·ÅÖÃCPU°æµÄ»ù´¡¾µÏñ£¬»ùÓÚUbuntu£¬º¬ÓĞiServerËùĞèÏµÍ³ÒÀÀµ+AIGIS ËùĞèµÄcondaÒÀÀµ | registry.cn-beijing.aliyuncs.com/imanager/ubuntu_aigislib_cpu
+ubuntu_withlibs_cpu |  æ”¾ç½®CPUç‰ˆçš„åŸºç¡€é•œåƒï¼ŒåŸºäºUbuntuï¼Œå«æœ‰iServeræ‰€éœ€ç³»ç»Ÿä¾èµ–+AIGIS æ‰€éœ€çš„condaä¾èµ– | registry.cn-beijing.aliyuncs.com/imanager/ubuntu_aigislib_cpu
 
 
 
-> ËµÃ÷£ºÃ¿´ÎÌá½»»á´¥·¢¾µÏñ×Ô¶¯¹¹½¨£¬¹¹½¨Ê±¼äÔ¼Îª30min
+> è¯´æ˜ï¼šæ¯æ¬¡æäº¤ä¼šè§¦å‘é•œåƒè‡ªåŠ¨æ„å»ºï¼Œæ„å»ºæ—¶é—´çº¦ä¸º30min
+
+## ä½¿ç”¨æ–¹æ³•
+
+- æ‰‹å·¥è¿›å…¥
+> docker run -it registry.cn-beijing.aliyuncs.com/imanager/ubuntu_aigislib_cpu bash
+
+
+- é•œåƒåˆ¶ä½œ
+
+> FROM registry.cn-beijing.aliyuncs.com/imanager/ubuntu_aigislib_cpu
