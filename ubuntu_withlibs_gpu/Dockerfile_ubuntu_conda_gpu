@@ -1,0 +1,53 @@
+# BUILD to  registry.cn-beijing.aliyuncs.com/imanager/ubuntu_aigislib_cpu
+FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+
+ADD keyboard /etc/default/keyboard
+
+RUN rm /etc/apt/sources.list.d/* && \
+  apt-get update && \
+  apt-get install -y make gcc binutils perl libx11-dev xinit libgomp1 libxtst6 libxi6 language-pack-zh-hans lsb-core && \
+  apt-get install -y libc6-i386 libglu1-mesa libxcursor1 && \
+  apt-get install -y curl unzip libaio1 && \
+  apt-get install -y vim-gtk && \
+  apt-get install -y mysql-client mongodb-clients && \
+  apt-get clean && apt-get autoclean && \
+  rm -rf /var/lib/apt/lists/* && \
+  curl -LO http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+  bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b && \
+  rm Miniconda3-latest-Linux-x86_64.sh
+
+ADD hasplm.ini /etc/hasplm/hasplm.ini
+ADD init.sh /opt/init.sh
+
+RUN curl http://imanager-tool.oss-cn-beijing.aliyuncs.com/oracle_instant_client_11.2.04.tar.gz -o /tmp/oracle_instant_client.tar.gz && \
+  curl http://imanager-tool.oss-cn-beijing.aliyuncs.com/aksusbd-2.4.1-i386.tar -o /tmp/aksusbd.tar && \
+  tar -xvf /tmp/aksusbd.tar -C /opt && \
+  tar -zxvf /tmp/oracle_instant_client.tar.gz -C /etc && \
+  ln -s /opt/aksusbd* /opt/aksusbd && \
+  chmod +x /opt/init.sh && \
+  rm -f /tmp/aksusbd.tar /tmp/oracle_instant_client.tar.gz
+
+RUN ln -s /etc/oracle_instant_client/network/admin/tnsnames.ora /opt/tnsnames.ora \
+  && ln -s /etc/oracle_instant_client/libclntsh.so.*.1 /etc/oracle_instant_client/libclntsh.so.10.1
+
+ENV LICENSE_DIR=/opt/SuperMap/License
+ENV ORACLE_HOME /etc/oracle_instant_client
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/etc/oracle_instant_client
+ENV PATH $PATH:/etc/oracle_instant_client
+ENV TNS_ADMIN $ORACLE_HOME/network/admin
+ENV LANG=zh_CN.utf8
+RUN export LANG=$LANG
+
+RUN mkdir -p $LICENSE_DIR
+
+ENV PATH=/miniconda/bin:${PATH}
+# RUN conda update -y conda
+WORKDIR /home/supermap
+
+COPY requirements-conda-gpu.yml ./
+
+RUN conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ && \
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ && \
+  conda config --set show_channel_urls yes && \
+  conda env update -n base -f requirements-conda-gpu.yml && \
+  conda clean --all -f -y
